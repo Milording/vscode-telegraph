@@ -18,14 +18,14 @@ function openTelegraph() {
     let editor = vscode.window.activeTextEditor as vscode.TextEditor;
     var textOfFile = editor.document.getText();
     
-    let shortName = "Васек";
-    let name = "Василий";
+    let shortName = "Aldous";
+    let name = "Huxley";
     let url = "http://google.com";
     client.createAccount(shortName, name, url).then((account:any)=> {
         client.token = account.access_token;
-        let title = "Название";
+        let title = "Point Counter Point";
         let content = [new Node("p", [textOfFile])];
-        let authorName = "Создатель";
+        let authorName = "Aldous Huxley";
         let authorUrl = "http://google.com";
         let returnContent = false;
 
