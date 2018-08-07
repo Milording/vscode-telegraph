@@ -4,9 +4,7 @@ Visual Studio Code extension that allows you to post your stories directly in Te
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
+Posting and how it works!
 
 ![feature X](http://g.recordit.co/IFsDs9oBUB.gif)
 
