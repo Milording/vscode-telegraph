@@ -15,8 +15,6 @@ export function activate(context: vscode.ExtensionContext) {
 function openTelegraph() {
     const client = new Telegraph();
 
-
-
     let editor = vscode.window.activeTextEditor as vscode.TextEditor;
     var textOfFile = editor.document.getText();
 
@@ -32,12 +30,16 @@ function openTelegraph() {
 
         let usernameInputBoxOptions: vscode.InputBoxOptions = {
             prompt: 'Please input an author name.',
-            placeHolder: 'Author name'
+            placeHolder: 'Author name',
+            value: 'Anonymous',
+            valueSelection: undefined
         };
 
         let configurations = vscode.workspace.getConfiguration('telepost');
         let authorName : string | undefined;
-        if(!configurations.has('authorName')) {
+        
+        if(!configurations.has('authorName') 
+        || configurations.get('authorName')===null) {
             authorName = await vscode.window.showInputBox(usernameInputBoxOptions);
             configurations.update('authorName', authorName);
         } else {

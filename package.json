@@ -22,7 +22,7 @@
             "properties": {
                 "telepost.authorName": {
                     "type": "string",
-                    "default": "Anonymous",
+                    "default": null,
                     "description": "Default author name used when creating new articles."
                 },
                 "telepost.authorUrl": {
