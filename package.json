@@ -2,7 +2,7 @@
     "name": "telegraph-poster",
     "displayName": "telegraph-poster",
     "description": "Small tool which allows you to create a Telegraph post",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "milording",
     "engines": {
         "vscode": "^1.25.0"
@@ -16,6 +16,22 @@
     ],
     "main": "./out/extension",
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Telepost Configuration",
+            "properties": {
+                "telepost.authorName": {
+                    "type": "string",
+                    "default": "Anonymous",
+                    "description": "Default author name used when creating new articles."
+                },
+                "telepost.authorUrl": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Profile link, opened when users click on the author's name below the title. Can be any link, not necessarily to a Telegram profile or channel."
+                }
+            }
+        },
         "commands": [
             {
                 "command": "extension.telepost",
