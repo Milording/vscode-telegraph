@@ -1,11 +1,19 @@
 'use strict';
 import * as vscode from 'vscode';
+import { Node } from './Models/Node';
 
 const open = require('opn');
 const Telegraph = require('telegra.ph');
 
 export function activate(context: vscode.ExtensionContext) {
-    let disposable = vscode.commands.registerCommand('extension.telepost', () => {
+    let disposable = vscode.commands.registerCommand('extension.telepost', async () => {
+        
+        let authorName = await getAuthorNameFromSettings();
+        if(authorName===undefined){
+            authorName = await askAuthorName();
+            updateAuthorNameSettings(authorName);
+        }
+
         openTelegraph();
     });
 
@@ -18,49 +26,74 @@ function openTelegraph() {
     let editor = vscode.window.activeTextEditor as vscode.TextEditor;
     var textOfFile = editor.document.getText();
 
-    let shortName = "Aldous";
-    let name = "Huxley";
-    let url = "http://google.com";
-    client.createAccount(shortName, name, url).then(async(account: any) => {
+    let shortName = "VsCode";
+    let name = "Extension";
+    let url = "https://github.com/Milording/vscode-telegraph";
+    client.createAccount(shortName, name, url).then(async (account: any) => {
         client.token = account.access_token;
-        let title = "Point Counter Point";
         let content = [new Node("p", [textOfFile])];
         let authorUrl = "http://google.com";
         let returnContent = false;
 
-        let usernameInputBoxOptions: vscode.InputBoxOptions = {
-            prompt: 'Please input an author name.',
-            placeHolder: 'Author name',
-            value: 'Anonymous',
-            valueSelection: undefined
-        };
+        const pageTitle = await askPageTitle();
+        let authorName = await getAuthorNameFromSettings();
 
-        let configurations = vscode.workspace.getConfiguration('telepost');
-        let authorName : string | undefined;
-        
-        if(!configurations.has('authorName') 
-        || configurations.get('authorName')===null) {
-            authorName = await vscode.window.showInputBox(usernameInputBoxOptions);
-            configurations.update('authorName', authorName);
-        } else {
-            authorName = configurations.get('authorName');
-        }
-
-        return client.createPage(title, content, authorName, authorUrl, returnContent);
+        return client.createPage(pageTitle, content, authorName, authorUrl, returnContent);
     }).then(async (page: any) => {
         open(page.url);
     });
 }
 
-export function deactivate() {
+async function askPageTitle() {
+    let title: string | undefined;
+
+    let titleInputBoxOptions: vscode.InputBoxOptions = {
+        prompt: 'Please input the title.',
+        placeHolder: 'Title',
+        value: 'Untitled',
+        valueSelection: undefined
+    };
+    title = await vscode.window.showInputBox(titleInputBoxOptions);
+
+    return title;
 }
 
-class Node {
-    tag: string;
-    children: string[];
+async function askAuthorName() {
+    let authorName: string | undefined;
 
-    constructor(tag: string, children: string[]) {
-        this.tag = tag;
-        this.children = children;
+    let authorNameInputBoxOptions: vscode.InputBoxOptions = {
+        prompt: 'Please input an author name.',
+        placeHolder: 'Author name',
+        value: 'Anonymous',
+        valueSelection: undefined
+    };
+
+    authorName = getAuthorNameFromSettings();
+    if (getAuthorNameFromSettings() === undefined) {
+        authorName = await vscode.window.showInputBox(authorNameInputBoxOptions);
+        updateAuthorNameSettings(authorName);
     }
+
+    return authorName;
+}
+
+function getAuthorNameFromSettings() {
+    let configurations = vscode.workspace.getConfiguration('telepost');
+    const authorNameSettingsKey = 'authorName';
+    let authorName: string | undefined;
+
+    if (configurations.has(authorNameSettingsKey)) {
+        authorName = configurations.get('authorName');
+    }
+    return authorName;
+}
+
+function updateAuthorNameSettings(authorName: string | undefined) {
+    let configurations = vscode.workspace.getConfiguration('telepost');
+    const authorNameSettingsKey = 'authorName';
+
+    configurations.update(authorNameSettingsKey, authorName);
+}
+
+export function deactivate() {
 }
