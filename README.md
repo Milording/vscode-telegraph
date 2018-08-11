@@ -5,8 +5,7 @@ Visual Studio Code extension that allows you to post your stories directly in Te
 ## Features
 
 - [x] General posting possibility
-- [ ] Saving account details in settings
-- [ ] Login
+- [x] Saving account details in settings
 - [ ] Editing
 - [ ] Statistics of views
 
