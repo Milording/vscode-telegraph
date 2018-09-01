@@ -26,7 +26,7 @@ function openTelegraph() {
     let editor = vscode.window.activeTextEditor as vscode.TextEditor;
     var textOfFile = editor.document.getText();
 
-    let shortName = "VsCode";
+    let shortName = "VS";
     let name = "Extension";
     let url = "https://github.com/Milording/vscode-telegraph";
     client.createAccount(shortName, name, url).then(async (account: any) => {
