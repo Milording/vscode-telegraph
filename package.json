@@ -1,7 +1,7 @@
 {
     "name": "telegraph-poster",
     "displayName": "telegraph-poster",
-    "description": "Small tool which allows you to create a Telegraph post",
+    "description": "Creates a Telegraph post from your file",
     "version": "0.0.2",
     "publisher": "milording",
     "engines": {
@@ -11,6 +11,7 @@
         "Other"
     ],
     "activationEvents": [
+        "onLanguage:markdown",
         "workspaceContains:**/.md",
         "onCommand:extension.telepost"
     ],
@@ -35,7 +36,15 @@
         "commands": [
             {
                 "command": "extension.telepost",
-                "title": "Telepost"
+                "title": "Telepost: Post"
+            },
+            {
+                "command": "extension.telepost.setAuthor",
+                "title": "Telepost: Set author name"
+            },
+            {
+                "command": "extension.telepost.setAuthorUrl",
+                "title": "Telepost: Set author link"
             }
         ]
     },
@@ -47,11 +56,11 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.10.10",
         "tslint": "^5.8.0",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
     },
     "dependencies": {
         "opn": "^5.3.0",
