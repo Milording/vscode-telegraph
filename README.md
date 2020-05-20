@@ -9,7 +9,8 @@ Visual Studio Code extension that allows you to post your stories directly in Te
 - [ ] Editing
 - [ ] Statistics of views
 
-![feature X](https://telegra.ph/file/94e4aa8a10d6b186dc85f.gif)
+
+![feature X](./images/workflow.gif)
 
 ## Extension Settings
 

@@ -4,6 +4,7 @@
     "description": "Creates a Telegraph post from your text",
     "version": "0.2.1",
     "publisher": "milording",
+    "license": "WTFPL",
     "icon": "images/logo.png",
     "repository": {
         "url": "https://github.com/Milording/vscode-telegraph"
@@ -14,6 +15,13 @@
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "telegraph",
+        "telegram",
+        "medium",
+        "article"
+    ],
+    "preview": true,
     "activationEvents": [
         "onLanguage:markdown",
         "workspaceContains:**/.md",
