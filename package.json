@@ -1,9 +1,10 @@
 {
     "name": "telepost",
     "displayName": "Telepost",
-    "description": "Creates a Telegraph post from your file",
+    "description": "Creates a Telegraph post from your text",
     "version": "0.2.0",
     "publisher": "milording",
+    "icon": "images/logo.png",
     "repository": {
         "url": "https://github.com/Milording/vscode-telegraph"
     },
