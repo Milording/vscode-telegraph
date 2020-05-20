@@ -2,7 +2,7 @@
     "name": "telepost",
     "displayName": "Telepost",
     "description": "Creates a Telegraph post from your text",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "publisher": "milording",
     "icon": "images/logo.png",
     "repository": {
